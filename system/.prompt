@@ -1,0 +1,13 @@
+# Zsh prompt configuration
+
+# Git status in prompt
+autoload -Uz vcs_info
+precmd() { vcs_info }
+
+# Format the vcs_info_msg_0_ variable
+zstyle ':vcs_info:git:*' formats '%b %m%u%c'
+zstyle ':vcs_info:*' enable git
+
+# Set up the prompt with git branch name
+setopt PROMPT_SUBST
+PROMPT='%F{green}%n@%m%f:%F{blue}%~%f %F{yellow}${vcs_info_msg_0_}%f$ '

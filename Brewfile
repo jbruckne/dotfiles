@@ -11,6 +11,11 @@ brew "fzf"            # Command-line fuzzy finder
 # Development tools
 brew "mise"           # Dev environment manager
 brew "gh"             # GitHub CLI
+brew "starship"       # Cross-shell prompt
+
+# Fonts
+tap "homebrew/cask-fonts"
+cask "font-jetbrains-mono-nerd-font" # Nerd Font for terminal icons
 
 # Casks (macOS applications)
 cask "ghostty"        # GPU-accelerated terminal emulator

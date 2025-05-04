@@ -1,0 +1,18 @@
+# Local Starship configuration
+# This file is not tracked by git and can contain machine-specific settings
+
+# Example: Enable/disable specific modules
+# [kubernetes]
+# disabled = false
+# style = "bold blue"
+
+# Example: Change prompt format
+# format = """
+# [┌───────────────────>](bold green)
+# [│](bold green)$directory$git_branch$git_status
+# [└─>](bold green) """
+
+# Example: Change colors
+# [character]
+# success_symbol = "[➜](bold cyan)"
+# error_symbol = "[✗](bold red)"

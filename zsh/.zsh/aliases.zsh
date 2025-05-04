@@ -1,5 +1,3 @@
-# Aliases for zsh
-
 # Navigation
 alias ..='cd ..'
 alias ...='cd ../..'

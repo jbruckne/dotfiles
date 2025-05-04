@@ -13,6 +13,7 @@ This repository contains configuration files for:
 - Zed editor (`.config/zed/settings.json`)
 - VS Code editor (settings and keybindings)
 - Mise version manager (`.mise.toml`)
+- Starship prompt (`.config/starship.toml`)
 - Homebrew bundle (Brewfile) for installing common tools
 
 ## Directory Structure
@@ -25,7 +26,13 @@ This repository contains configuration files for:
 - `zed/`: Zed editor configuration
 - `vscode/`: VS Code editor configuration
 - `mise/`: Mise version manager configuration
+- `starship/`: Starship prompt configuration
 - `local/`: Local configuration templates (not tracked by git)
+
+## Requirements
+
+- **JetBrains Mono Nerd Font**: Required for Starship prompt icons to display correctly
+- **GNU Stow**: Used for managing symlinks
 
 ## Installation
 
@@ -123,6 +130,10 @@ The zsh configuration is split into modular files:
 ### Mise Configuration
 - `.mise.toml`: Core mise settings
 - `.mise.local.toml`: Local mise settings (not tracked in git)
+
+### Starship Configuration
+- `starship.toml`: Core prompt settings
+- `starship.local.toml`: Local prompt settings (not tracked in git)
 
 ## Updating
 

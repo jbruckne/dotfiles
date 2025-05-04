@@ -1,0 +1,70 @@
+# Warm, subtle starship prompt configuration
+# Works well on both light and dark themes
+
+add_newline = true
+
+format = """
+$directory\
+$git_branch\
+$package\
+$nodejs\
+$rust\
+$python\
+$golang\
+$java\
+$line_break\
+$character"""
+
+# Warm, subtle color palette
+[character]
+success_symbol = "[→](#8b9e75)" # sage green arrow
+error_symbol = "[→](#c25450)" # soft red arrow
+vimcmd_symbol = "[◆](#8b9e75)" # sage green diamond for vim mode
+
+[directory]
+style = "#6c8b9f" # soft blue-gray
+truncation_length = 3
+truncation_symbol = "…/"
+format = "[$path]($style) "
+
+[git_branch]
+format = "on [$symbol$branch]($style) "
+symbol = " " # git branch/fork icon
+style = "#c9a26d" # warm amber/gold
+
+[package]
+format = "is [$symbol$version]($style) "
+symbol = " " # package icon
+style = "#b07d62" # subtle rust/copper
+
+[nodejs]
+format = "via [$symbol$version]($style) "
+symbol = " " # node.js icon
+style = "#a67458" # muted terracotta
+version_format = "${major}.${minor}"
+
+[rust]
+format = "via [$symbol$version]($style) "
+symbol = " " # rust icon
+style = "#a67458" # muted terracotta
+version_format = "${major}.${minor}"
+
+[python]
+format = "via [$symbol$version]($style) "
+symbol = " " # python icon
+style = "#a67458" # muted terracotta
+version_format = "${major}.${minor}"
+
+[golang]
+format = "via [$symbol$version]($style) "
+symbol = " " # go icon
+style = "#a67458" # muted terracotta
+version_format = "${major}.${minor}"
+
+[java]
+format = "via [$symbol$version]($style) "
+symbol = " " # java icon
+style = "#a67458" # muted terracotta
+version_format = "${major}.${minor}"
+
+# Only show relevant language version based on the current directory

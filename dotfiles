@@ -18,7 +18,7 @@ BOLD='\033[1m'
 NC='\033[0m' # No Color
 
 # Available packages
-PACKAGES=(zsh vim git-config inputrc ghostty zed vscode mise)
+PACKAGES=(zsh vim git-config inputrc ghostty zed vscode mise starship)
 
 # Backup directory
 BACKUP_DIR="$HOME/.dotfiles_backup"
@@ -150,6 +150,9 @@ is_package_installed() {
     mise)
       [[ -L "$HOME/.mise.toml" ]] && return 0
       ;;
+    starship)
+      [[ -L "$HOME/.config/starship.toml" ]] && return 0
+      ;;
   esac
   return 1
 }
@@ -189,6 +192,9 @@ list_packages() {
         ;;
       mise)
         echo "  Mise version manager configuration (.mise.toml)"
+        ;;
+      starship)
+        echo "  Starship prompt configuration (.config/starship.toml)"
         ;;
     esac
   done
@@ -409,6 +415,13 @@ install_dotfiles() {
           rm "$HOME/.mise.toml"
         fi
         ;;
+      starship)
+        backup_if_exists "$HOME/.config/starship.toml"
+        # Remove the original file after backup to avoid stow conflicts
+        if [[ -f "$HOME/.config/starship.toml" && ! -L "$HOME/.config/starship.toml" && "$DRY_RUN" != "true" ]]; then
+          rm "$HOME/.config/starship.toml"
+        fi
+        ;;
     esac
   done
 
@@ -439,6 +452,9 @@ install_dotfiles() {
             print_success "Trusted mise local config file"
           fi
         fi
+        ;;
+      starship)
+        create_local_config "$DOTFILES_DIR/starship/.config/starship.local.toml.example"
         ;;
     esac
   done

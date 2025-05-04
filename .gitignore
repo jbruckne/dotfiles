@@ -1,0 +1,7 @@
+# Ignore local configuration files
+vim/.vimrc.local
+git-config/.gitconfig.local
+zsh/.zsh/local.zsh
+
+# macOS
+.DS_Store

@@ -1,7 +1,7 @@
 # .zshrc - Zsh configuration file
 
-# Load pre-initialization scripts
-[[ -f ~/.zsh/pre.d/00_load_pre.zsh ]] && source ~/.zsh/pre.d/00_load_pre.zsh
+# Set Paths
+source ~/.path
 
 # Set Default Editor
 export EDITOR=/usr/bin/vim
@@ -9,14 +9,11 @@ export EDITOR=/usr/bin/vim
 # Set default blocksize for ls, df, du
 export BLOCKSIZE=1k
 
-# Load shared configurations
-[[ -f ~/.zsh/path.zsh ]] && source ~/.zsh/path.zsh
-[[ -f ~/.zsh/aliases.zsh ]] && source ~/.zsh/aliases.zsh
-[[ -f ~/.zsh/functions.zsh ]] && source ~/.zsh/functions.zsh
-[[ -f ~/.zsh/prompt.zsh ]] && source ~/.zsh/prompt.zsh
-
-# Load local configurations (not tracked in git)
-[[ -f ~/.zsh/local.zsh ]] && source ~/.zsh/local.zsh
+# Load custom configurations
+source ~/.env
+source ~/.alias
+source ~/.function
+source ~/.prompt
 
 # History configuration
 HISTFILE=~/.zsh_history
@@ -50,12 +47,3 @@ setopt PUSHD_SILENT         # do not print the directory stack after pushd or po
 # Correction
 setopt CORRECT              # command auto-correction
 setopt CORRECT_ALL          # argument auto-correction
-
-# Initialize mise
-if command -v mise &> /dev/null; then
-  eval "$(mise activate zsh)"
-fi
-
-# Load post-initialization scripts
-[[ -f ~/.zsh/post.d/99_load_post.zsh ]] && source ~/.zsh/post.d/99_load_post.zsh
-export PATH="$HOME/bin:$PATH"

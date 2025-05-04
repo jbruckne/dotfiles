@@ -1,0 +1,16 @@
+# This is an example local git configuration file
+# Copy this to .gitconfig.local and customize with your personal settings
+
+# Example: Work email for specific directories
+# [includeIf "gitdir:~/work/"]
+#   path = ~/.gitconfig.work
+
+# Example: Custom credential helper
+# [credential]
+#   helper = osxkeychain
+
+# Example: GPG signing key
+# [user]
+#   signingkey = YOUR_GPG_KEY_ID
+# [commit]
+#   gpgsign = true

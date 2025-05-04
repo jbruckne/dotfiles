@@ -1,0 +1,11 @@
+" Example local vim configuration
+" Copy this to .vimrc.local and customize with your personal settings
+
+" Example: Custom colorscheme
+" colorscheme molokai
+
+" Example: Custom key mappings
+" nnoremap <leader>w :w<CR>
+
+" Example: Custom plugins settings
+" let g:airline_theme='solarized'
