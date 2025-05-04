@@ -1,0 +1,15 @@
+# This file contains global settings for mise
+# For more information, see https://mise.jdx.dev/configuration/
+
+[tools]
+# Migrated from asdf .tool-versions
+nodejs = "18.19.0"
+java = "openjdk-17"
+python = "3.8.16"
+
+[settings]
+# Always use shims to ensure consistent PATH behavior
+always_keep_download = true
+always_keep_install = true
+legacy_version_file = true
+jobs = 4

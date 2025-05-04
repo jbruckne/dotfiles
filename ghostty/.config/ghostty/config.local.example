@@ -1,0 +1,10 @@
+# Local Ghostty configuration
+# This file is not tracked by git and can contain machine-specific settings
+
+# Example: Machine-specific font settings
+# font_family = JetBrains Mono
+# font_size = 14
+
+# Example: Machine-specific window settings
+# window_width = 120
+# window_height = 40

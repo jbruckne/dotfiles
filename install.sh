@@ -15,7 +15,7 @@ BOLD='\033[1m'
 NC='\033[0m' # No Color
 
 # Available packages
-PACKAGES=(zsh vim git-config inputrc)
+PACKAGES=(zsh vim git-config inputrc ghostty zed vscode mise)
 
 # Backup directory
 BACKUP_DIR="$HOME/.dotfiles_backup"
@@ -99,6 +99,18 @@ list_packages() {
         ;;
       inputrc)
         echo "  Readline configuration (.inputrc)"
+        ;;
+      ghostty)
+        echo "  Ghostty terminal configuration (.config/ghostty/)"
+        ;;
+      zed)
+        echo "  Zed editor configuration (.config/zed/)"
+        ;;
+      vscode)
+        echo "  VS Code configuration (Library/Application Support/Code/User/)"
+        ;;
+      mise)
+        echo "  Mise version manager configuration (.mise.toml)"
         ;;
     esac
   done
@@ -284,6 +296,38 @@ install_dotfiles() {
           rm "$HOME/.inputrc"
         fi
         ;;
+      ghostty)
+        backup_if_exists "$HOME/.config/ghostty"
+        # Remove the original directory after backup to avoid stow conflicts
+        if [[ -d "$HOME/.config/ghostty" && ! -L "$HOME/.config/ghostty" && "$DRY_RUN" != "true" ]]; then
+          rm -rf "$HOME/.config/ghostty"
+        fi
+        ;;
+      zed)
+        backup_if_exists "$HOME/.config/zed/settings.json"
+        # Remove the original file after backup to avoid stow conflicts
+        if [[ -f "$HOME/.config/zed/settings.json" && ! -L "$HOME/.config/zed/settings.json" && "$DRY_RUN" != "true" ]]; then
+          rm "$HOME/.config/zed/settings.json"
+        fi
+        ;;
+      vscode)
+        backup_if_exists "$HOME/Library/Application Support/Code/User/settings.json"
+        backup_if_exists "$HOME/Library/Application Support/Code/User/keybindings.json"
+        # Remove the original files after backup to avoid stow conflicts
+        if [[ -f "$HOME/Library/Application Support/Code/User/settings.json" && ! -L "$HOME/Library/Application Support/Code/User/settings.json" && "$DRY_RUN" != "true" ]]; then
+          rm "$HOME/Library/Application Support/Code/User/settings.json"
+        fi
+        if [[ -f "$HOME/Library/Application Support/Code/User/keybindings.json" && ! -L "$HOME/Library/Application Support/Code/User/keybindings.json" && "$DRY_RUN" != "true" ]]; then
+          rm "$HOME/Library/Application Support/Code/User/keybindings.json"
+        fi
+        ;;
+      mise)
+        backup_if_exists "$HOME/.mise.toml"
+        # Remove the original file after backup to avoid stow conflicts
+        if [[ -f "$HOME/.mise.toml" && ! -L "$HOME/.mise.toml" && "$DRY_RUN" != "true" ]]; then
+          rm "$HOME/.mise.toml"
+        fi
+        ;;
     esac
   done
 
@@ -300,6 +344,12 @@ install_dotfiles() {
         ;;
       git-config)
         create_local_config "$DOTFILES_DIR/git-config/.gitconfig.local.example"
+        ;;
+      ghostty)
+        create_local_config "$DOTFILES_DIR/ghostty/.config/ghostty/config.local.example"
+        ;;
+      mise)
+        create_local_config "$DOTFILES_DIR/mise/.mise.local.toml.example"
         ;;
     esac
   done
