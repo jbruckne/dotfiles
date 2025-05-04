@@ -51,7 +51,7 @@ setopt PUSHD_SILENT         # do not print the directory stack after pushd or po
 setopt CORRECT              # command auto-correction
 setopt CORRECT_ALL          # argument auto-correction
 
-# Initialize mise (replacement for asdf)
+# Initialize mise
 if command -v mise &> /dev/null; then
   eval "$(mise activate zsh)"
 fi

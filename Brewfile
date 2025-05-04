@@ -9,7 +9,7 @@ brew "bat"            # Cat clone with syntax highlighting
 brew "fzf"            # Command-line fuzzy finder
 
 # Development tools
-brew "mise"           # Dev environment manager (replacement for asdf)
+brew "mise"           # Dev environment manager
 brew "gh"             # GitHub CLI
 
 # Casks (macOS applications)

@@ -1,0 +1,18 @@
+# Local ZSH configuration
+# This file is not tracked by git and can contain machine-specific settings
+
+# Example: Machine-specific PATH additions
+# export PATH=$HOME/bin:$PATH
+
+# Example: Machine-specific environment variables
+# export JAVA_HOME=/path/to/java
+# export ANDROID_HOME=$HOME/Library/Android/sdk
+
+# Example: Machine-specific aliases
+# alias ll='ls -la'
+# alias projects='cd ~/projects'
+
+# Example: Machine-specific functions
+# function mkcd() {
+#   mkdir -p "$1" && cd "$1"
+# }
