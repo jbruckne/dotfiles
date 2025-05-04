@@ -81,12 +81,49 @@ usage() {
   echo
 }
 
+# Function to check if a package is installed
+is_package_installed() {
+  local pkg="$1"
+  case "$pkg" in
+    zsh)
+      [[ -L "$HOME/.zshrc" && -L "$HOME/.zsh" ]] && return 0
+      ;;
+    vim)
+      [[ -L "$HOME/.vimrc" ]] && return 0
+      ;;
+    git-config)
+      [[ -L "$HOME/.gitconfig" && -L "$HOME/.gitignore_global" ]] && return 0
+      ;;
+    inputrc)
+      [[ -L "$HOME/.inputrc" ]] && return 0
+      ;;
+    ghostty)
+      [[ -L "$HOME/.config/ghostty/config" ]] && return 0
+      ;;
+    zed)
+      [[ -L "$HOME/.config/zed/settings.json" ]] && return 0
+      ;;
+    vscode)
+      [[ -L "$HOME/Library/Application Support/Code/User/settings.json" ]] && return 0
+      ;;
+    mise)
+      [[ -L "$HOME/.mise.toml" ]] && return 0
+      ;;
+  esac
+  return 1
+}
+
 # List available packages
 list_packages() {
   print_section "Available Packages"
   
   for pkg in "${PACKAGES[@]}"; do
-    echo -e "${BOLD}${pkg}${NC}"
+    if is_package_installed "$pkg"; then
+      echo -e "${GREEN}✓${NC} ${BOLD}${pkg}${NC}"
+    else
+      echo -e "${YELLOW}○${NC} ${BOLD}${pkg}${NC}"
+    fi
+    
     case "$pkg" in
       zsh)
         echo "  Shell configuration (.zshrc, .zsh/)"
@@ -114,6 +151,9 @@ list_packages() {
         ;;
     esac
   done
+  
+  echo
+  echo -e "${GREEN}✓${NC} = Installed  ${YELLOW}○${NC} = Not installed"
 }
 
 # List available backups
