@@ -45,26 +45,26 @@ brew bundle
 
 ### Setup
 
-The installation script provides several options:
+The dotfiles CLI provides several options:
 
 ```bash
 # Install all dotfiles (default)
-./install.sh
+dotfiles
 
 # List available packages and backups
-./install.sh --list
+dotfiles --list
 
 # Install specific packages
-./install.sh --packages zsh,vim
+dotfiles --packages zsh,vim
 
 # Migrate existing configs to local configs
-./install.sh --migrate
+dotfiles --migrate
 
 # Dry run to see what would happen without making changes
-./install.sh --dry-run
+dotfiles --dry-run
 
 # Revert to a previous backup
-./install.sh --revert --backup 20250504_120000
+dotfiles --revert --backup 20250504_120000
 ```
 
 When installing, the script will:
@@ -75,7 +75,7 @@ When installing, the script will:
 5. Create local configuration files from examples if they don't exist
 6. Create symbolic links from your home directory to the files in this repository
 
-The installation script is designed to be idempotent - you can run it multiple times safely.
+The dotfiles CLI is designed to be idempotent - you can run it multiple times safely.
 
 ## Customization
 
@@ -125,8 +125,8 @@ The zsh configuration is split into modular files:
 To update your dotfiles after making changes:
 
 ```bash
-# Re-run stow for the updated package
-stow -R zsh  # Replace 'zsh' with the package you modified
+# Re-run the dotfiles command for the updated package
+dotfiles --packages zsh  # Replace 'zsh' with the package you modified
 ```
 
 ## License
