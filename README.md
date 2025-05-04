@@ -65,6 +65,9 @@ dotfiles --dry-run
 
 # Revert to a previous backup
 dotfiles --revert --backup 20250504_120000
+
+# Make dotfiles command available system-wide
+dotfiles --bootstrap
 ```
 
 When installing, the script will:
@@ -74,6 +77,7 @@ When installing, the script will:
 4. Migrate existing configuration to local config files when appropriate
 5. Create local configuration files from examples if they don't exist
 6. Create symbolic links from your home directory to the files in this repository
+7. Make the `dotfiles` command available system-wide
 
 The dotfiles CLI is designed to be idempotent - you can run it multiple times safely.
 

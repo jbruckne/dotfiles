@@ -60,6 +60,42 @@ print_error() {
   echo -e "${RED}✗ $1${NC}"
 }
 
+# Bootstrap the dotfiles CLI tool
+bootstrap_cli() {
+  print_section "Bootstrapping dotfiles CLI"
+  
+  # Create ~/bin directory if it doesn't exist
+  if [[ ! -d "$HOME/bin" ]]; then
+    print_info "Creating ~/bin directory..."
+    if [[ "$DRY_RUN" != "true" ]]; then
+      mkdir -p "$HOME/bin"
+      print_success "Created ~/bin directory"
+    fi
+  else
+    print_info "~/bin directory already exists"
+  fi
+  
+  # Create symlink to dotfiles CLI
+  if [[ ! -L "$HOME/bin/dotfiles" || "$(readlink "$HOME/bin/dotfiles")" != "$DOTFILES_DIR/dotfiles" ]]; then
+    print_info "Creating symlink to dotfiles CLI..."
+    if [[ "$DRY_RUN" != "true" ]]; then
+      ln -sf "$DOTFILES_DIR/dotfiles" "$HOME/bin/dotfiles"
+      print_success "Created symlink: ~/bin/dotfiles -> $DOTFILES_DIR/dotfiles"
+    fi
+  else
+    print_info "Symlink to dotfiles CLI already exists"
+  fi
+  
+  # Check if ~/bin is in PATH
+  if [[ ":$PATH:" != *":$HOME/bin:"* ]]; then
+    print_warning "~/bin is not in your PATH"
+    print_info "After installation, you may need to restart your shell or run:"
+    print_info "  export PATH=\"\$HOME/bin:\$PATH\""
+  else
+    print_success "~/bin is in your PATH"
+  fi
+}
+
 # Print usage information
 usage() {
   echo -e "${BOLD}Usage:${NC} $SCRIPT_NAME [options]"
@@ -73,6 +109,7 @@ usage() {
   echo "  -b, --backup DIR     Specify backup directory for revert"
   echo "  -n, --dry-run        Show what would be done without making changes"
   echo "  -m, --migrate        Migrate existing configs to local configs"
+  echo "  --bootstrap          Make dotfiles command available system-wide"
   echo
   echo -e "${BOLD}Examples:${NC}"
   echo "  $SCRIPT_NAME --install                  # Install all dotfiles"
@@ -81,6 +118,7 @@ usage() {
   echo "  $SCRIPT_NAME --install --migrate        # Install and migrate existing configs"
   echo "  $SCRIPT_NAME --revert --backup 20250504_120000  # Revert to specific backup"
   echo "  $SCRIPT_NAME --dry-run --migrate        # Preview migration without changes"
+  echo "  $SCRIPT_NAME --bootstrap                # Make dotfiles command available system-wide"
   echo
 }
 
@@ -475,10 +513,11 @@ zparseopts -D -E -F -K -- \
   r=revert -revert=revert \
   b:=backup_opt -backup:=backup_opt \
   n=dry_run -dry-run=dry_run \
-  m=migrate -migrate=migrate
+  m=migrate -migrate=migrate \
+  -bootstrap=bootstrap
 
 # Set default action if none specified
-if [[ ${#help} -eq 0 && ${#list} -eq 0 && ${#install} -eq 0 && ${#revert} -eq 0 ]]; then
+if [[ ${#help} -eq 0 && ${#list} -eq 0 && ${#install} -eq 0 && ${#revert} -eq 0 && ${#bootstrap} -eq 0 ]]; then
   install=1
 fi
 
@@ -509,6 +548,11 @@ if [[ ${#list} -gt 0 ]]; then
   list_packages
   echo
   list_backups
+  exit 0
+fi
+
+if [[ ${#bootstrap} -gt 0 ]]; then
+  bootstrap_cli
   exit 0
 fi
 
@@ -545,6 +589,10 @@ if [[ ${#install} -gt 0 || ${#pkg_opt} -gt 0 ]]; then
   
   # Install selected packages
   install_dotfiles "${selected_packages[@]}"
+  
+  # Bootstrap the CLI tool after installation
+  bootstrap_cli
+  
   exit 0
 fi
 
