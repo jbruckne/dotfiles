@@ -350,6 +350,14 @@ install_dotfiles() {
         ;;
       mise)
         create_local_config "$DOTFILES_DIR/mise/.mise.local.toml.example"
+        # Trust the mise local config file to prevent warnings
+        if command -v mise &> /dev/null && [[ -f "$HOME/.mise.local.toml" ]]; then
+          print_info "Trusting mise local config file..."
+          if [[ "$DRY_RUN" != "true" ]]; then
+            mise trust "$HOME/.mise.local.toml" &>/dev/null || true
+            print_success "Trusted mise local config file"
+          fi
+        fi
         ;;
     esac
   done
