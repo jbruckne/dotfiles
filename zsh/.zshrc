@@ -4,6 +4,7 @@
 [[ -f ~/.zsh/pre.d/00_load_pre.zsh ]] && source ~/.zsh/pre.d/00_load_pre.zsh
 
 # Set Default Editor
+# Options: /usr/bin/vim, hx (helix), code --wait (vscode), zed --wait
 export EDITOR=/usr/bin/vim
 
 # Set default blocksize for ls, df, du
@@ -56,6 +57,28 @@ if command -v mise &> /dev/null; then
   eval "$(mise activate zsh)"
 fi
 
+# Initialize zoxide (smarter cd with frecency)
+if command -v zoxide &> /dev/null; then
+  eval "$(zoxide init zsh)"
+  # Use 'z' to jump to directories, 'zi' for interactive selection
+fi
+
+# Initialize fzf (fuzzy finder)
+if command -v fzf &> /dev/null; then
+  # Key bindings: Ctrl-R (history), Ctrl-T (files), Alt-C (cd directories)
+  source <(fzf --zsh)
+fi
+
+# Initialize thefuck (corrects previous console commands)
+if command -v thefuck &> /dev/null; then
+  eval "$(thefuck --alias)"
+  # Now you can type 'fuck' after a command fails to get suggestions
+  # Example: brew update vim -> fuck -> suggests: brew upgrade vim
+fi
+
 # Load post-initialization scripts
 [[ -f ~/.zsh/post.d/99_load_post.zsh ]] && source ~/.zsh/post.d/99_load_post.zsh
 export PATH="$HOME/bin:$PATH"
+alias claude="/Users/joebruckner/.claude/local/claude"
+
+[[ "$TERM_PROGRAM" == "kiro" ]] && . "$(kiro --locate-shell-integration-path zsh)"

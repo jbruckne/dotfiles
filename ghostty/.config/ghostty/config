@@ -7,7 +7,9 @@
 # on Ghostty's website, at https://ghostty.org/docs/config.
 
 ### THEMES
-theme = light:Novel,dark:Earthsong
+theme = light:Xcode Light hc,dark:Xcode Dark hc
+macos-icon = official
+macos-titlebar-style = tabs
 
 ### FONTS
 font-family = JetBrainsMono Nerd Font
@@ -15,3 +17,12 @@ font-size = 14
 
 ### KEY BINDINGS
 keybind = global:ctrl+grave_accent=toggle_quick_terminal
+
+### Window Management
+quick-terminal-position = center
+quick-terminal-animation-duration = 0
+quick-terminal-size = 60%,80%
+keybind = shift+enter=text:\n
+
+### Split Appearance
+unfocused-split-opacity = 0.95

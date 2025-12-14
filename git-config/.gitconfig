@@ -4,13 +4,29 @@
 [color]
 	ui = auto
 [core]
-	pager = less -FMRiX
+	pager = delta
 	excludesfile = ~/.gitignore_global
 [push]
 	default = simple
 [alias]
 	dag = log --graph --format='format:%C(yellow)%h%C(reset) %C(blue)\"%an\" <%ae>%C(reset) %C(magenta)%cr%C(reset)%C(auto)%d%C(reset)%n%s' --date-order
-	
+
+# Delta (syntax-highlighting pager for git diffs)
+[interactive]
+	diffFilter = delta --color-only
+
+[delta]
+	navigate = true    # Use n and N to move between diff sections
+	light = false      # Set to true if you use a light terminal theme
+	side-by-side = true # Show diffs side-by-side
+	line-numbers = true
+
+[merge]
+	conflictstyle = diff3
+
+[diff]
+	colorMoved = default
+
 # Include local/private config
 [include]
 	path = ~/.gitconfig.local

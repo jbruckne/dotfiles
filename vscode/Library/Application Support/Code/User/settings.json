@@ -31,5 +31,6 @@
   "workbench.colorTheme": "Default Dark+ Experimental",
   "workbench.settings.applyToAllProfiles": [
     "files.autoSave"
-  ]
+  ],
+  "docker.extension.enableComposeLanguageServer": false
 }

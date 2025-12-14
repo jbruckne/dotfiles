@@ -8,9 +8,5 @@ for file in ${ZDOTDIR:-$HOME}/.zsh/post.d/*.zsh; do
   fi
 done
 
-# Amazon Q post block
-[[ -f "${HOME}/Library/Application Support/amazon-q/shell/zshrc.post.zsh" ]] && \
-  builtin source "${HOME}/Library/Application Support/amazon-q/shell/zshrc.post.zsh"
-
 # LM Studio CLI
 export PATH="$PATH:$HOME/.lmstudio/bin"

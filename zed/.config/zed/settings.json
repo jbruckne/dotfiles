@@ -7,6 +7,9 @@
 // custom settings, run the `open default settings` command
 // from the command palette or from `Zed` application menu.
 {
+  "terminal": {
+    "dock": "right"
+  },
   "base_keymap": "VSCode",
   "theme": "Xcode High Contrast Dark",
   "ui_font_size": 16,

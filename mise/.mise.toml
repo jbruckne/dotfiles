@@ -3,9 +3,8 @@
 
 [tools]
 # Global tool versions
-nodejs = "18.19.0"
-java = "openjdk-17"
-python = "3.8.16"
+nodejs = "20.19.2"
+java = ["openjdk-17", "openjdk-21"]
 
 [settings]
 # Always use shims to ensure consistent PATH behavior

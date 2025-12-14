@@ -18,7 +18,7 @@ BOLD='\033[1m'
 NC='\033[0m' # No Color
 
 # Available packages
-PACKAGES=(zsh vim git-config inputrc ghostty zed vscode mise starship)
+PACKAGES=(zsh vim git-config inputrc ghostty zed vscode mise starship claude)
 
 # Backup directory
 BACKUP_DIR="$HOME/.dotfiles_backup"
@@ -153,6 +153,9 @@ is_package_installed() {
     starship)
       [[ -L "$HOME/.config/starship.toml" ]] && return 0
       ;;
+    claude)
+      [[ -L "$HOME/.claude/CLAUDE.md" ]] && return 0
+      ;;
   esac
   return 1
 }
@@ -196,9 +199,12 @@ list_packages() {
       starship)
         echo "  Starship prompt configuration (.config/starship.toml)"
         ;;
+      claude)
+        echo "  Claude Code AI configuration (.claude/)"
+        ;;
     esac
   done
-  
+
   echo
   echo -e "${GREEN}✓${NC} = Installed  ${YELLOW}○${NC} = Not installed"
 }
@@ -420,6 +426,17 @@ install_dotfiles() {
         # Remove the original file after backup to avoid stow conflicts
         if [[ -f "$HOME/.config/starship.toml" && ! -L "$HOME/.config/starship.toml" && "$DRY_RUN" != "true" ]]; then
           rm "$HOME/.config/starship.toml"
+        fi
+        ;;
+      claude)
+        backup_if_exists "$HOME/.claude/CLAUDE.md"
+        backup_if_exists "$HOME/.claude/shell-power-usage.md"
+        # Remove the original files after backup to avoid stow conflicts
+        if [[ -f "$HOME/.claude/CLAUDE.md" && ! -L "$HOME/.claude/CLAUDE.md" && "$DRY_RUN" != "true" ]]; then
+          rm "$HOME/.claude/CLAUDE.md"
+        fi
+        if [[ -f "$HOME/.claude/shell-power-usage.md" && ! -L "$HOME/.claude/shell-power-usage.md" && "$DRY_RUN" != "true" ]]; then
+          rm "$HOME/.claude/shell-power-usage.md"
         fi
         ;;
     esac
